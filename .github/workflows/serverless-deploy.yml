@@ -1,0 +1,30 @@
+name: Deploy Qoqnoos to Telegram Serverless
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'handlers/**'
+      - 'lib/**'
+      - 'schema.js'
+      - 'package.json'
+      - '.github/workflows/serverless-deploy.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Telegram Serverless CLI
+        run: npm install -g @tgcloud/cli
+      - name: Deploy modules
+        env:
+          TGCLOUD_TOKEN: ${{ secrets.TGCLOUD_TOKEN }}
+        run: tgcloud push
