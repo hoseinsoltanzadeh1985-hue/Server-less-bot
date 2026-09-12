@@ -1,0 +1,15 @@
+{
+  "name": "pedi-guardian-serverless",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "status": "tgcloud status",
+    "diff": "tgcloud diff",
+    "push": "tgcloud push",
+    "migrate": "tgcloud migrate",
+    "deploy": "tgcloud push && tgcloud migrate"
+  },
+  "devDependencies": {
+    "@tgcloud/cli": "latest"
+  }
+}
