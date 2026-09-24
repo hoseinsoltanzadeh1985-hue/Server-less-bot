@@ -65,7 +65,7 @@ export const notes = table('notes', {
   value: text('value').notNull(),
   createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
 }, (t) => ({
-  notePk: primaryKey({ columns: [t.chatId, t.name] }),
+  noteLookup: index('idx_notes_chat_name').on(t.chatId, t.name),
 }));
 
 export const auditLogs = table('audit_logs', {
